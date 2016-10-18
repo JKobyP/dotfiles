@@ -4,6 +4,8 @@ URxvt.saveLines: 32767
 URxvt*termName: rxvt
 URxvt.depth: 32
 URxvt*background: [93]#34393D
+URxvt.urgentOnBell: true
+URxvt.visualBell: true
 
 Emacs.menuBar: 0
 Emacs.toolBar: 0
