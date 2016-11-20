@@ -3,25 +3,19 @@
 " This must be first, because it changes other options as a side effect.
 set nocompatible
 
-" disable YouCompleteMe
-" let g:pathogen_disabled = ['YouCompleteMe']
-
-" setting for vim-powerline
 set laststatus=2   " Always show the statusline
 set t_Co=256 " Explicitly tell Vim that the terminal supports 256 colors
 
 " keeps lines from getting too long
 set textwidth=80
-
 " maps whitespace to visible stuff
 set encoding=utf-8
 set listchars=tab:→\ ,trail:·
 
-"*** These settings taken from : http://www.alexeyshmalko.com/2014/using-vim-as-c-cpp-ide/
-
 " forces vim to load vimrc in working directory if exists (for project specific configs)
 set exrc
 set secure 
+
 " style guide
 set tabstop=4
 set softtabstop=4
@@ -32,30 +26,14 @@ set colorcolumn=80
 highlight ColorColumn ctermbg=magenta
 autocmd Filetype go set colorcolumn=0
 
-"*** Pathogen (and stuff from pathogen github)
-" execute pathogen#infect()
-syntax on
-filetype plugin indent on
-
-""*** Set colorscheme solarized (plugin)
-"set background=dark
-"colorscheme solarized
-
-" An example for a vimrc file.
-"
-" Maintainer:	Bram Moolenaar <Bram@vim.org>
-" Last change:	2014 Feb 05
-"
+"*** Pathogen
+"execute pathogen#infect()
 
 " allow backspacing over everything in insert mode
 set backspace=indent,eol,start
 
-if has("vms")
-  set nobackup		" do not keep a backup file, use versions instead
-else
-  set backup		" keep a backup file (restore to previous version)
-  set undofile		" keep an undo file (undo changes after closing)
-endif
+set backup		" keep a backup file (restore to previous version)
+set undofile		" keep an undo file (undo changes after closing)
 set history=50		" keep 50 lines of command line history
 set ruler		" show the cursor position all the time
 set showcmd		" display incomplete commands
@@ -77,12 +55,11 @@ endif
 " Also switch on highlighting the last used search pattern.
 if &t_Co > 2 || has("gui_running")
   syntax on
-  set hlsearch
   highlight incsearch ctermbg=23
   highlight search ctermbg=23
 endif
 
-" Only do this part when compiled with support for autocommands.
+"{{{ Only do this part when compiled with support for autocommands.
 if has("autocmd")
 
   " Enable file type detection.
@@ -92,7 +69,7 @@ if has("autocmd")
   filetype plugin indent on
 
   " Put these in an autocmd group, so that we can delete them easily.
-  augroup vimrcEx
+  augroup vimrc
   au!
 
   " For all text files set 'textwidth' to 78 characters.
@@ -112,12 +89,9 @@ if has("autocmd")
   autocmd InsertLeave * if pumvisible() == 0|pclose|endif
 
   augroup END
-
 else
-
   set autoindent		" always set autoindenting on
-
-endif " has("autocmd")
+endif " has("autocmd") }}}
 
 " Convenient command to see the difference between the current buffer and the
 " file it was loaded from, thus the changes you made.
@@ -135,8 +109,24 @@ autocmd InsertEnter * :set list
 autocmd InsertLeave * :set relativenumber
 autocmd InsertLeave * :set nolist 
 
+noremap <C-m> <C-W>
 noremap <C-j> <C-W>j
 noremap <C-k> <C-W>k
 noremap <C-h> <C-W>h
 noremap <C-l> <C-W>l
 let mapleader=","
+
+" plugins
+"noremap <Leader>e :NERDTreeToggle <CR>
+"set runtimepath^=~/.vim/bundle/ctrlp.vim
+
+" separate backup folders
+"set backup
+"set backupdir=~/.vim/backup
+"set directory=~/.vim/tmp
+
+"automatically change to the directory of the file in the buffer
+set autochdir
+
+set foldmethod=marker
+inoremap jj <Esc>
