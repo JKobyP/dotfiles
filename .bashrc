@@ -17,7 +17,11 @@ export VISUAL=vim
 # add my scripts directory to the path
 export PATH=$PATH:~/scripts
 export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting
-export PATH=$PATH:/home/koby/.gem/ruby/2.2.0/bin # Add ruby gem executables
+export PATH=$PATH:/home/koby/.gem/ruby/2.4.0/bin # Add ruby gem executables
+export PATH=$PATH:~/.local/bin
+export GOROOT=$HOME/go
+export GOPATH=$HOME/dev/work
+export PATH=$PATH:$GOPATH/bin:$GOROOT/bin
 
 # *** BASH PROMPT ***
 #      *** ***
@@ -70,6 +74,9 @@ function parse_git_dirty {
 
 export PS1="\u \[\e[35m\]\w\[\e[m\] \[\e[32m\]\`parse_git_branch\`\[\e[m\] \n\$ "
 # *** End custom prompt section
+
+eval $(ssh-agent)
+source ~/.git-completion.bash
 
 # source untested stuff
 [[ -f ~/.bash_experimental ]] && . ~/.bash_experimental
